@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { LocalisationService } from 'src/app/services/localisation.service';
 
 @Component({
   selector: 'app-google-map',
@@ -16,7 +17,11 @@ export class GoogleMapComponent implements OnInit {
 
   waypoints: any;
 
-  constructor(public platform: Platform) {
+  constructor(
+    public platform: Platform,
+    public locationService: LocalisationService
+  ) {
+    console.log(this.locationService.simpleTest);
     this.lat = 41.85;
     this.lng = -87.65;
     this.height = platform.height();
