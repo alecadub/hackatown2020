@@ -1,5 +1,7 @@
 {
   "name": "hackatown2020",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
