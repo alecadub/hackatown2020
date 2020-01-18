@@ -1,9 +1,67 @@
+<!--Header-->
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Tab Three
+    <ion-title style= "text-align: center;">
+      <b>Settings</b>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+
+<ion-content fullscreen>
+
+  <br><br>
+  <!--Danger Values-->
+  <ion-list-header>Danger Tolerance</ion-list-header>
+
+  <ion-segment>
+    <ion-segment-button checked>
+      <ion-label>Very Careful</ion-label>
+    </ion-segment-button>
+    <ion-segment-button>
+      <ion-label>Careful</ion-label>
+    </ion-segment-button>
+    <ion-segment-button>
+      <ion-label>Bad Ass</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <br><br>
+
+  <!--Preferences-->
+  <ion-list-header>Danger Properties</ion-list-header>
+
+  <ion-item>
+    <ion-label>Lighting</ion-label>
+    <ion-checkbox color="primary" checked slot="start"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Crime Average</ion-label>
+    <ion-checkbox color="primary" checked slot="start"></ion-checkbox>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Crowding</ion-label>
+    <ion-checkbox color="primary" checked slot="start"></ion-checkbox>
+  </ion-item>
+
+  <br><br>
+
+  <!--Theme-->
+  <ion-list-header>Theme</ion-list-header>
+
+  <ion-item>
+    <ion-label>Color</ion-label>
+    <ion-select>
+      <ion-select-option value="Dark Mode">Dark Mode</ion-select-option>
+      <ion-select-option value="Blue">Blue</ion-select-option>
+      <ion-select-option value="Pink">Pink</ion-select-option>
+      <ion-select-option value="Green">Green</ion-select-option>
+      <ion-select-option value="Red">Red</ion-select-option>
+      <ion-select-option value="Purple">Purple</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+</ion-content>
+
