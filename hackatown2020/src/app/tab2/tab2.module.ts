@@ -7,6 +7,7 @@ import { Tab2Page } from './tab2.page';
 import { GoogleMapComponent } from './components/google-map/google-map.component';
 import { APIkey } from 'src/environments/key';
 import { AgmCoreModule } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { AgmCoreModule } from '@agm/core';
     AgmCoreModule.forRoot({
       apiKey: APIkey
     }),
+    AgmDirectionModule,
     RouterModule.forChild([{ path: '', component: Tab2Page }])
   ],
   declarations: [Tab2Page, GoogleMapComponent]
