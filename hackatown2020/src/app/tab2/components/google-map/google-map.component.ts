@@ -14,12 +14,19 @@ export class GoogleMapComponent implements OnInit {
 
   height: number;
 
+  waypoints: any;
+
   constructor(public platform: Platform) {
-    this.lat = 24.799448;
-    this.lng = 120.979021;
+    this.lat = 41.85;
+    this.lng = -87.65;
     this.height = platform.height();
-    this.origin = { lat: 24.799448, lng: 120.979021 };
-    this.destination = { lat: 24.799524, lng: 120.975017 };
+
+    this.origin = { lat: 29.8174782, lng: -95.6814757 };
+    this.destination = { lat: 40.6976637, lng: -74.119764 };
+    this.waypoints = [
+      { location: { lat: 39.0921167, lng: -94.8559005 } },
+      { location: { lat: 41.8339037, lng: -87.8720468 } }
+    ];
   }
 
   ngOnInit() {}

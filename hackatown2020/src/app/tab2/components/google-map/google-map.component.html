@@ -1,4 +1,7 @@
 <agm-map [style.height.px]="height" [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-  <agm-direction [origin]="origin" [destination]="destination"> </agm-direction>
+  <agm-direction
+    [origin]="origin"
+    [destination]="destination"
+    [waypoints]="waypoints"
+  ></agm-direction>
 </agm-map>
