@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { LocalisationService } from 'src/app/services/localisation.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-
+import * as crimeData from 'src/assets/data/crimeData.json';
+import * as cameraData from 'src/assets/data/cameraPosition.json';
 @Component({
   selector: 'app-google-map',
   templateUrl: './google-map.component.html',
@@ -15,6 +16,9 @@ export class GoogleMapComponent implements OnInit {
   startingLongitude: number;
   origin: any;
   destination: any;
+
+  crimeCircles: any;
+  cameraCircles: any;
 
   icon = {
     url: 'https://svgshare.com/i/HP9.svg',
@@ -52,10 +56,11 @@ export class GoogleMapComponent implements OnInit {
     this.getUserCurrentLocation();
     this.setOriginAndDestination();
     this.subscribeToUserInput();
-    this.parseData();
+    this.createCircles();
+    this.setCrimesAndCameras();
   }
 
-  public parseData() {
+  public createCircles() {
     //creating the squares
     this.circles = new Array();
 
@@ -97,9 +102,13 @@ export class GoogleMapComponent implements OnInit {
       }
       count++;
     }
+  }
 
-
-    console.log(this.circles);
+  public setCrimesAndCameras() {
+    this.cameraCircles = cameraData;
+    this.crimeCircles = crimeData;
+    this.cameraCircles = this.cameraCircles.default;
+    this.crimeCircles = this.crimeCircles.default;
   }
 
   public getUserCurrentLocation() {
