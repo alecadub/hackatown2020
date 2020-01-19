@@ -41,14 +41,14 @@ export class GooglePlacesComponent implements OnInit {
     this.mapsAPILoader.load().then(() => {
       this.setCurrentLocation();
       this.geoCoder = new google.maps.Geocoder();
-
+      
       let toAutocomplete = new google.maps.places.Autocomplete(
         this.toAddressRef.nativeElement,
         {
           types: ['address']
         }
       );
-
+      
       let fromAutoComplete = new google.maps.places.Autocomplete(
         this.fromAddressRef.nativeElement,
         {
@@ -65,10 +65,6 @@ export class GooglePlacesComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-
-          console.log('To Address:' + place.formatted_address);
-          console.log('To Latitude: ' + place.geometry.location.lat());
-          console.log('To Longitude: ' + place.geometry.location.lng());
 
           this.addressTo = place.formatted_address;
 
@@ -88,10 +84,6 @@ export class GooglePlacesComponent implements OnInit {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-
-          console.log('From Address:' + place.formatted_address);
-          console.log('From Latitude: ' + place.geometry.location.lat());
-          console.log('From Longitude: ' + place.geometry.location.lng());
 
           this.addressFrom = place.formatted_address;
 
@@ -120,8 +112,6 @@ export class GooglePlacesComponent implements OnInit {
     this.geoCoder.geocode(
       { location: { lat: latitude, lng: longitude } },
       (results, status) => {
-        console.log(results);
-        console.log(status);
         if (status === 'OK') {
           if (results[0]) {
             this.zoomTo = 12;
@@ -137,7 +127,6 @@ export class GooglePlacesComponent implements OnInit {
   }
 
   markerDragEnd($event: MouseEvent) {
-    console.log($event);
     this.latitudeTo = $event.coords.lat;
     this.longitudeTo = $event.coords.lng;
     this.getAddress(this.latitudeTo, this.longitudeTo);
