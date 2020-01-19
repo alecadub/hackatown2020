@@ -151,6 +151,7 @@ export class GooglePlacesComponent implements OnInit {
         this.longitudeTo
       ]);
       this.router.navigate(['/tabs/tab2']);
+    
     }
   }
 }

@@ -128,6 +128,10 @@ export class GoogleMapComponent implements OnInit {
     });
     this.locationService.destination.subscribe(resp => {
       if (Array.isArray(resp) && resp.length) {
+        if (resp[2]){
+          this.getUserCurrentLocation();
+          this.origin = { lat: this.startingLatitude, lng: this.startingLongitude };
+        }
         this.destination = { lat: resp[0], lng: resp[1] };
       }
     });
