@@ -32,13 +32,14 @@
     travelMode="WALKING"
     (onResponse)="onResponse($event)"
     [renderOptions]="dir.renderOptions"
-  ></agm-direction>
+  ></agm-direction> -->
   <agm-rectangle
-    [east]="-73.5089292023"
-    [west]="-73.849258276"
-    [north]="45.6931206483"
-    [south]="45.4168499734"
-    [fillColor]="'red'"
+    *ngFor= "let item of squares"
+    [east] = "item.SE"
+    [west] = "item.NW"
+    [north] = "45.6931206483"
+    [south] = "item.SW"
+    [fillColor] = "'red'"
   >
   </agm-rectangle>
 </agm-map>

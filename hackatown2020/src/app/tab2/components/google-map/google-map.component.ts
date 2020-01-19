@@ -24,6 +24,8 @@ export class GoogleMapComponent implements OnInit {
   orangeWalkDistance: any;
   blueWalkDistance: any;
 
+  squares: any;
+
   height: number;
 
   waypoints: any;
@@ -50,6 +52,61 @@ export class GoogleMapComponent implements OnInit {
     this.getUserCurrentLocation();
     this.setOriginAndDestination();
     this.subscribeToUserInput();
+    this.parseData();
+  }
+
+  public parseData(){
+    
+    //creating the squares
+    this.squares= new Array<Object>();
+
+    let minLongitude: number = -73.9244750407;
+    let maxLongitude: number = -73.489373;
+
+    let minLatitude: number = 45.4168499734;
+    let maxLatitude: number = 45.6931206483;
+
+    this.squares[0] = {
+      SW: [minLongitude, minLatitude],
+      SE: [minLongitude+0.005, minLatitude],
+      NW: [minLongitude, minLatitude+0.005],
+      NE: [minLongitude+0.005, minLatitude+0.005],
+      crimes: 0,
+      cameras: 0
+    }
+
+    let longitude = minLongitude;
+    let latitude = minLatitude;
+    let count = 1;
+
+    for(var i=1; i < 4928; i++){
+      
+      if (count == 88){
+        latitude += 0.005;
+        count = 0;
+
+        this.squares[i] = {
+          SW: [minLongitude, latitude],
+          SE: [minLongitude+0.005, latitude],
+          NW: [minLongitude, latitude+0.005],
+          NE: [minLongitude=0.05, latitude+0.05],
+          crimes: 0,
+          cameras: 0
+        }
+      }
+      else{
+        longitude += 0.005; 
+        this.squares[i] = {
+          SW: [longitude, latitude],
+          SE: [longitude+0.005, latitude],
+          NW: [longitude, latitude+0.005],
+          NE: [longitude=0.05, latitude+0.05],
+          crimes: 0,
+          cameras: 0
+        }
+      }
+      count++;
+    }
   }
 
   public getUserCurrentLocation() {
