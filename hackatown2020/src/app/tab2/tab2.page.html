@@ -1,3 +1,32 @@
 <ion-content>
   <app-google-map></app-google-map>
+
+  <!-- Reporting Button -->
+  <ion-fab id="reporting" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="report()">
+      <ion-icon name="arrow-dropup"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Crime Button -->
+  <ion-fab id="crime" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button color="danger">
+      <ion-icon name="flame"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Light Button -->
+  <ion-fab id="light" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button color="warning">
+      <ion-icon name="flashlight"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Crowd Button -->
+  <ion-fab id="crowd" vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button color="tertiary">
+      <ion-icon name="people"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
 </ion-content>
