@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-label>Default: </ion-label> {{ orangeWalkDistance }}
     <ion-icon class="walkTime" id="orangeWalk" name="walk"></ion-icon>
-  
+
     <ion-label>Safe: </ion-label> {{ blueWalkDistance }}
     <ion-icon class="walkTime" id="blueWalk" name="walk"></ion-icon>
   </ion-toolbar>
@@ -12,6 +12,7 @@
   [style.height.px]="height"
   [latitude]="startingLatitude"
   [longitude]="startingLongitude"
+  [zoom]="11"
 >
   <agm-marker
     *ngIf="addMarker > 0"
@@ -40,7 +41,17 @@
     [fillColor]="'red'"
     [radius]="200"
     [fillOpacity]="0.25"
+    (mouseOver)="infoWindow.open()"
+    (mouseOut)="infoWindow.close()"
   >
+    <agm-info-window
+      [disableAutoPan]="false"
+      [latitude]="circle.LATITUDE"
+      [longitude]="circle.LONGITUDE"
+      #infoWindow
+    >
+      <label class="sr-bold">{{ circle.CATEGORIE }}</label>
+    </agm-info-window>
   </agm-circle>
   <agm-circle
     *ngFor="let circle of cameraCircles"
