@@ -33,11 +33,29 @@
     (onResponse)="onResponse($event)"
     [renderOptions]="dir.renderOptions"
   ></agm-direction> -->
-  <agm-circle
+  <!-- <agm-circle
     *ngFor="let circle of circles"
     [latitude]="circle.latitude"
     [longitude]="circle.longitude"
     [fillColor]="'red'"
+    [radius]="200"
+    [fillOpacity]="0.25"
+  >
+  </agm-circle> -->
+  <agm-circle
+    *ngFor="let circle of crimeCircles"
+    [latitude]="circle.LATITUDE"
+    [longitude]="circle.LONGITUDE"
+    [fillColor]="'red'"
+    [radius]="200"
+    [fillOpacity]="0.25"
+  >
+  </agm-circle>
+  <agm-circle
+    *ngFor="let circle of cameraCircles"
+    [latitude]="circle.latitude"
+    [longitude]="circle.longitude"
+    [fillColor]="'green'"
     [radius]="200"
     [fillOpacity]="0.25"
   >
