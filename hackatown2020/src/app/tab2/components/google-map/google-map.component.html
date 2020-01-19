@@ -1,3 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    {{ orangeWalkDistance }}
+    <ion-icon class="orangeWalk" name="walk"></ion-icon>
+    {{ blueWalkDistance }}
+    <ion-icon class="blueWalk" name="walk"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
 <agm-map
   [style.height.px]="height"
   [latitude]="startingLatitude"
@@ -19,11 +28,11 @@
     [renderOptions]="dir.renderOptions"
   ></agm-direction>
   <agm-rectangle
-    [east] = "-73.5089292023"
-    [west] = "-73.849258276"
-    [north] = "45.6931206483"
-    [south] = "45.4168499734"
-    [fillColor] = "'red'"
+    [east]="-73.5089292023"
+    [west]="-73.849258276"
+    [north]="45.6931206483"
+    [south]="45.4168499734"
+    [fillColor]="'red'"
   >
   </agm-rectangle>
 </agm-map>
