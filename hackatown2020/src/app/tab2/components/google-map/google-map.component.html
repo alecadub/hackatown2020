@@ -35,11 +35,12 @@
   ></agm-direction> -->
   <agm-rectangle
     *ngFor= "let item of squares"
-    [east] = "item.SE"
-    [west] = "item.NW"
+    [east] = "-73.5089292023"
+    [west] = "-73.849258276"
     [north] = "45.6931206483"
-    [south] = "item.SW"
+    [south] = "45.4168499734"
     [fillColor] = "'red'"
+    [fillOpacity] = "'0.005'"
   >
   </agm-rectangle>
 </agm-map>

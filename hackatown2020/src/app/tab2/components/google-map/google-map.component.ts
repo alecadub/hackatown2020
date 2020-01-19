@@ -61,10 +61,10 @@ export class GoogleMapComponent implements OnInit {
     this.squares= new Array<Object>();
 
     let minLongitude: number = -73.9244750407;
-    let maxLongitude: number = -73.489373;
+    //*****let maxLongitude: number = -73.489373;
 
     let minLatitude: number = 45.4168499734;
-    let maxLatitude: number = 45.6931206483;
+    //******let maxLatitude: number = 45.6931206483;
 
     this.squares[0] = {
       SW: [minLongitude, minLatitude],
