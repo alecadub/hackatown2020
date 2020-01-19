@@ -18,11 +18,12 @@
     (onResponse)="onResponse($event)"
     [renderOptions]="dir.renderOptions"
   ></agm-direction>
-  <agm-circle
-    [latitude]="lat + 0.3"
-    [longitude]="lng"
-    [radius]="5000"
-    [fillColor]="'red'"
+  <agm-rectangle
+    [east] = "-73.5089292023"
+    [west] = "-73.849258276"
+    [north] = "45.6931206483"
+    [south] = "45.4168499734"
+    [fillColor] = "'red'"
   >
-  </agm-circle>
+  </agm-rectangle>
 </agm-map>
