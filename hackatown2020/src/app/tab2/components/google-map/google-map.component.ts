@@ -9,8 +9,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   styleUrls: ['./google-map.component.scss']
 })
 export class GoogleMapComponent implements OnInit {
-  lat: number;
-  lng: number;
+  startingLatitude: number;
+  startingLongitude: number;
   origin: any;
   destination: any;
 
@@ -18,29 +18,39 @@ export class GoogleMapComponent implements OnInit {
 
   waypoints: any;
 
+  dir = {
+    renderOptions: {
+      polylineOptions: {
+        strokeColor: '#ffa500',
+        strokeOpacity: 0.6,
+        strokeWeight: 5
+      }
+    }
+  };
+
   constructor(
     public platform: Platform,
     public locationService: LocalisationService,
     private geolocation: Geolocation
   ) {
-    this.getUserCurrentLocation();
     this.height = platform.height();
-    this.setOriginAndDestination();
-    this.setWaypoints();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getUserCurrentLocation();
+    this.setOriginAndDestination();
+  }
 
   public getUserCurrentLocation() {
     this.geolocation
       .getCurrentPosition()
       .then(resp => {
-        this.lat = resp.coords.latitude;
-        this.lng = resp.coords.longitude;
+        this.startingLatitude = resp.coords.latitude;
+        this.startingLongitude = resp.coords.longitude;
       })
       .catch(error => {
-        this.lat = 45.50983679999995;
-        this.lng = -73.613312;
+        this.startingLatitude = 45.50983679999995;
+        this.startingLongitude = -73.613312;
         console.log('Error getting location', error);
       });
   }
@@ -55,5 +65,12 @@ export class GoogleMapComponent implements OnInit {
       { location: { lat: 39.0921167, lng: -94.8559005 } },
       { location: { lat: 41.8339037, lng: -87.8720468 } }
     ];
+  }
+
+  public onResponse(event: any) {
+    if (event) {
+      console.log(event.routes[0].overview_path[0].lat());
+      this.setWaypoints();
+    }
   }
 }
