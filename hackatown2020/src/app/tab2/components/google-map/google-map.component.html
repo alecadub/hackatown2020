@@ -12,6 +12,12 @@
   [latitude]="startingLatitude"
   [longitude]="startingLongitude"
 >
+  <agm-marker
+    *ngIf="addMarker > 0"
+    [latitude]="startingLatitude"
+    [longitude]="startingLongitude"
+    [iconUrl]="icon"
+  ></agm-marker>
   <agm-direction
     *ngIf="waypoints"
     [origin]="origin"

@@ -12,10 +12,11 @@ export class Tab2Page {
   lightButton: HTMLElement;
   crowdButton: HTMLElement;
   invertAction: boolean;
+  sendMarker = 0;
 
   constructor() {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.reportingButton = document.getElementById('reporting');
     this.crimeButton = document.getElementById('crime');
     this.lightButton = document.getElementById('light');
@@ -28,8 +29,8 @@ export class Tab2Page {
     this.invertAction = false;
   }
 
-  public report(){
-    if(this.invertAction){
+  public report() {
+    if (this.invertAction) {
       this.crimeButton.hidden = true;
       this.lightButton.hidden = true;
       this.crowdButton.hidden = true;
@@ -38,9 +39,8 @@ export class Tab2Page {
       this.lightButton.style.marginBottom = '0px';
       this.crowdButton.style.marginBottom = '0px';
 
-      this.reportingButton.childNodes[0].childNodes[0]["name"] = 'arrow-dropup';
-    }
-    else{
+      this.reportingButton.childNodes[0].childNodes[0]['name'] = 'arrow-dropup';
+    } else {
       this.crimeButton.hidden = false;
       this.lightButton.hidden = false;
       this.crowdButton.hidden = false;
@@ -49,9 +49,14 @@ export class Tab2Page {
       this.lightButton.style.marginBottom = '120px';
       this.crowdButton.style.marginBottom = '180px';
 
-      this.reportingButton.childNodes[0].childNodes[0]["name"] = 'arrow-dropdown';
+      this.reportingButton.childNodes[0].childNodes[0]['name'] =
+        'arrow-dropdown';
     }
 
     this.invertAction = !this.invertAction;
+  }
+
+  public addMarker() {
+    this.sendMarker = this.sendMarker + 1;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { LocalisationService } from 'src/app/services/localisation.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -9,10 +9,17 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   styleUrls: ['./google-map.component.scss']
 })
 export class GoogleMapComponent implements OnInit {
+  @Input() addMarker: any;
+
   startingLatitude: number;
   startingLongitude: number;
   origin: any;
   destination: any;
+
+  icon = {
+    url: 'https://svgshare.com/i/HP9.svg',
+    scaledSize: { width: 50, height: 50 }
+  };
 
   orangeWalkDistance: any;
   blueWalkDistance: any;
@@ -67,7 +74,6 @@ export class GoogleMapComponent implements OnInit {
   public subscribeToUserInput() {
     this.locationService.origin.subscribe(resp => {
       if (Array.isArray(resp) && resp.length) {
-        console.log(resp);
         this.origin = { lat: resp[0], lng: resp[1] };
       }
     });
@@ -86,7 +92,6 @@ export class GoogleMapComponent implements OnInit {
   }
 
   public onResponse(event: any) {
-    console.log(event);
     if (event && event.routes[0]) {
       if (event.routes[0].legs.length > 1) {
         let totalValue = 0;
@@ -99,7 +104,6 @@ export class GoogleMapComponent implements OnInit {
           event.routes[0].legs[0].duration.value
         );
       }
-      // console.log(event.routes[0].overview_path[0].lat());
       this.setWaypoints();
     }
   }

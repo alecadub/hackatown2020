@@ -1,5 +1,5 @@
 <ion-content>
-  <app-google-map></app-google-map>
+  <app-google-map [addMarker]="sendMarker"></app-google-map>
 
   <!-- Reporting Button -->
   <ion-fab id="reporting" vertical="bottom" horizontal="start" slot="fixed">
@@ -10,8 +10,8 @@
 
   <!-- Crime Button -->
   <ion-fab id="crime" vertical="bottom" horizontal="start" slot="fixed">
-    <ion-fab-button color="danger">
-      <ion-icon name="flame"></ion-icon>
+    <ion-fab-button (click)="addMarker()" color="danger">
+      <ion-icon name="logo-freebsd-devil"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
@@ -28,5 +28,4 @@
       <ion-icon name="people"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>
