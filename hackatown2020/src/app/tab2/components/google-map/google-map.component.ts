@@ -67,10 +67,10 @@ export class GoogleMapComponent implements OnInit {
     //******let maxLatitude: number = 45.6931206483;
 
     this.squares[0] = {
-      SW: [minLongitude, minLatitude],
-      SE: [minLongitude+0.005, minLatitude],
-      NW: [minLongitude, minLatitude+0.005],
-      NE: [minLongitude+0.005, minLatitude+0.005],
+      SW: minLongitude,
+      SE: minLongitude+0.005,
+      NW: minLatitude,
+      NE: minLatitude+0.005,
       crimes: 0,
       cameras: 0
     }
@@ -86,10 +86,10 @@ export class GoogleMapComponent implements OnInit {
         count = 0;
 
         this.squares[i] = {
-          SW: [minLongitude, latitude],
-          SE: [minLongitude+0.005, latitude],
-          NW: [minLongitude, latitude+0.005],
-          NE: [minLongitude=0.05, latitude+0.05],
+          SW: minLongitude,
+          SE: minLongitude+0.005,
+          NW: latitude,
+          NE: latitude+0.05,
           crimes: 0,
           cameras: 0
         }
@@ -97,10 +97,10 @@ export class GoogleMapComponent implements OnInit {
       else{
         longitude += 0.005; 
         this.squares[i] = {
-          SW: [longitude, latitude],
-          SE: [longitude+0.005, latitude],
-          NW: [longitude, latitude+0.005],
-          NE: [longitude=0.05, latitude+0.05],
+          SW: longitude,
+          SE: longitude+0.005,
+          NW: latitude,
+          NE: latitude+0.05,
           crimes: 0,
           cameras: 0
         }
