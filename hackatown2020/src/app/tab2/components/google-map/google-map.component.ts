@@ -14,6 +14,9 @@ export class GoogleMapComponent implements OnInit {
   origin: any;
   destination: any;
 
+  orangeWalkDistance: any;
+  blueWalkDistance: any;
+
   height: number;
 
   waypoints: any;
@@ -84,9 +87,36 @@ export class GoogleMapComponent implements OnInit {
 
   public onResponse(event: any) {
     console.log(event);
-    if (event) {
+    if (event && event.routes[0]) {
+      if (event.routes[0].legs.length > 1) {
+        let totalValue = 0;
+        event.routes[0].legs.forEach(elm => {
+          totalValue = totalValue + elm.duration.value;
+        });
+        this.blueWalkDistance = this.secondsToHms(totalValue);
+      } else {
+        this.orangeWalkDistance = this.secondsToHms(
+          event.routes[0].legs[0].duration.value
+        );
+      }
       // console.log(event.routes[0].overview_path[0].lat());
       this.setWaypoints();
     }
+  }
+
+  public secondsToHms(seconds: any) {
+    seconds = Number(seconds);
+
+    var h = Math.floor(seconds / 3600);
+    var m = Math.floor((seconds % 3600) / 60);
+    var s = Math.floor((seconds % 3600) % 60);
+
+    return (
+      ('0' + h).slice(-2) +
+      ':' +
+      ('0' + m).slice(-2) +
+      ':' +
+      ('0' + s).slice(-2)
+    );
   }
 }
