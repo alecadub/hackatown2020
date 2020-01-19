@@ -7,6 +7,7 @@ import { Tab1Page } from './tab1.page';
 import { AgmCoreModule } from '@agm/core';
 import { APIkey } from 'src/environments/key';
 import { AgmDirectionModule } from 'agm-direction';
+import { GooglePlacesComponent } from './components/google-places/google-places.component';
 
 @NgModule({
   imports: [
@@ -14,11 +15,12 @@ import { AgmDirectionModule } from 'agm-direction';
     CommonModule,
     FormsModule,
     AgmCoreModule.forRoot({
-      apiKey: APIkey
+      apiKey: APIkey,
+      libraries: ["places"]
     }),
     AgmDirectionModule,
     RouterModule.forChild([{ path: '', component: Tab1Page }])
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page, GooglePlacesComponent]
 })
 export class Tab1PageModule {}
