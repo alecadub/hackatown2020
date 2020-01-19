@@ -66,9 +66,6 @@ export class GooglePlacesComponent implements OnInit {
             return;
           }
 
-          console.log('To Address:' + place.formatted_address);
-          console.log('To Latitude: ' + place.geometry.location.lat());
-          console.log('To Longitude: ' + place.geometry.location.lng());
 
           this.addressTo = place.formatted_address;
 
@@ -89,9 +86,6 @@ export class GooglePlacesComponent implements OnInit {
             return;
           }
 
-          console.log('From Address:' + place.formatted_address);
-          console.log('From Latitude: ' + place.geometry.location.lat());
-          console.log('From Longitude: ' + place.geometry.location.lng());
 
           this.addressFrom = place.formatted_address;
 
@@ -120,8 +114,6 @@ export class GooglePlacesComponent implements OnInit {
     this.geoCoder.geocode(
       { location: { lat: latitude, lng: longitude } },
       (results, status) => {
-        console.log(results);
-        console.log(status);
         if (status === 'OK') {
           if (results[0]) {
             this.zoomTo = 12;
@@ -137,7 +129,6 @@ export class GooglePlacesComponent implements OnInit {
   }
 
   markerDragEnd($event: MouseEvent) {
-    console.log($event);
     this.latitudeTo = $event.coords.lat;
     this.longitudeTo = $event.coords.lng;
     this.getAddress(this.latitudeTo, this.longitudeTo);
