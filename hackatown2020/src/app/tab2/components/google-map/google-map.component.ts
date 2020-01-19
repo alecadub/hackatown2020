@@ -18,6 +18,7 @@ export class GoogleMapComponent implements OnInit {
   destination: any;
 
   waypointSet = false;
+  waypointPut = false;
 
   crimeCircles: any;
   cameraCircles: any;
@@ -154,43 +155,88 @@ export class GoogleMapComponent implements OnInit {
   }
 
   public setWaypoints(points: any) {
-    if (!this.waypointSet) {
-      let counter = 0;
-      let waypoint = {};
-      let elmPointsLat = 0;
-      let elmPointLng = 0;
-      points = points.overview_path;
-      let filteredPointsArray = points.forEach(elmPoints => {
-        elmPointsLat = elmPoints.lat();
-        elmPointLng = elmPoints.lng();
-        waypoint = { lat: elmPoints.lat(), lng: elmPoints.lng() };
-        this.crimeCircles.forEach(crime => {
-          if (
-            this.measure(
-              crime.latitude,
-              crime.longitude,
-              elmPointsLat,
-              elmPointLng
-            ) > 200
-          ) {
-            console.log('test');
-            waypoint = { lat: elmPoints.lat(), lng: elmPoints.lng() + 0.002 };
-          }
-        });
-        if (counter < 23) {
-          this.waypoints.push({ location: waypoint });
-        }
-        counter++;
-      });
-      counter = 0;
-      this.waypointSet = true;
-      console.log(this.waypoints);
+    let arrayPoint = points.overview_path;
+
+    let arrayPoint0 = {
+      lat: arrayPoint[0].lat(),
+      lng: arrayPoint[0].lng()
+    };
+    let arrayPoint10 = {
+      lat: arrayPoint[10].lat(),
+      lng: arrayPoint[10].lng()
+    };
+    let arrayPoint20 = {
+      lat: arrayPoint[20].lat(),
+      lng: arrayPoint[20].lng()
+    };
+    let arrayPoint30 = {
+      lat: arrayPoint[30].lat(),
+      lng: arrayPoint[30].lng()
+    };
+    let arrayPoint40 = {
+      lat: arrayPoint[40].lat(),
+      lng: arrayPoint[40].lng()
+    };
+    let arrayPoint50 = {
+      lat: arrayPoint[50].lat(),
+      lng: arrayPoint[50].lng()
+    };
+
+    if (this.isPointInCrimeRegion(arrayPoint[0])) {
+      arrayPoint0 = {
+        lat: arrayPoint[0].lat() + 0.002,
+        lng: arrayPoint[0].lng() + 0.002
+      };
     }
+
+    if (this.isPointInCrimeRegion(arrayPoint[10])) {
+      arrayPoint10 = {
+        lat: arrayPoint[10].lat() + 0.002,
+        lng: arrayPoint[10].lng() + 0.002
+      };
+    }
+
+    if (this.isPointInCrimeRegion(arrayPoint[20])) {
+      arrayPoint20 = {
+        lat: arrayPoint[20].lat() + 0.002,
+        lng: arrayPoint[20].lng() + 0.002
+      };
+    }
+
+    if (this.isPointInCrimeRegion(arrayPoint[30])) {
+      arrayPoint10 = {
+        lat: arrayPoint[30].lat() + 0.002,
+        lng: arrayPoint[30].lng() + 0.002
+      };
+    }
+
+    if (this.isPointInCrimeRegion(arrayPoint[40])) {
+      arrayPoint10 = {
+        lat: arrayPoint[40].lat() + 0.002,
+        lng: arrayPoint[40].lng() + 0.002
+      };
+    }
+
+    if (this.isPointInCrimeRegion(arrayPoint[50])) {
+      arrayPoint50 = {
+        lat: arrayPoint[50].lat() + 0.002,
+        lng: arrayPoint[50].lng() + 0.002
+      };
+    }
+    this.waypoints = [
+      { location: { lat: arrayPoint0.lat, lng: arrayPoint0.lng } },
+      { location: { lat: arrayPoint10.lat, lng: arrayPoint10.lng } },
+      { location: { lat: arrayPoint20.lat, lng: arrayPoint20.lng } },
+      { location: { lat: arrayPoint30.lat, lng: arrayPoint30.lng } },
+      { location: { lat: arrayPoint40.lat, lng: arrayPoint40.lng } },
+      { location: { lat: arrayPoint50.lat, lng: arrayPoint50.lng } }
+    ];
   }
 
   public onResponse(event: any) {
     if (event && event.routes[0]) {
       if (event.routes[0].legs.length > 1) {
+        console.log(event);
         let totalValue = 0;
         event.routes[0].legs.forEach(elm => {
           totalValue = totalValue + elm.duration.value;
@@ -228,5 +274,21 @@ export class GoogleMapComponent implements OnInit {
     if (Math.abs(lat1 - lat2) < 0.002 || Math.abs(lon1 - lon2) < 0.002) {
       return 201;
     }
+  }
+
+  public isPointInCrimeRegion(point: any) {
+    let isIn = false;
+    this.crimeCircles.forEach(elm => {
+      let number = this.measure(
+        elm.LATITUDE,
+        elm.LONGITUDE,
+        point.lat(),
+        point.lng()
+      );
+      if (number > 200) {
+        isIn = true;
+      }
+    });
+    return isIn;
   }
 }
