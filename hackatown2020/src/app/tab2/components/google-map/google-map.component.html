@@ -18,7 +18,7 @@
     [longitude]="startingLongitude"
     [iconUrl]="icon"
   ></agm-marker>
-  <!-- <agm-direction
+  <agm-direction
     *ngIf="waypoints"
     [origin]="origin"
     [destination]="destination"
@@ -32,8 +32,8 @@
     travelMode="WALKING"
     (onResponse)="onResponse($event)"
     [renderOptions]="dir.renderOptions"
-  ></agm-direction> -->
-  <!-- <agm-circle
+  ></agm-direction>
+  <agm-circle
     *ngFor="let circle of circles"
     [latitude]="circle.latitude"
     [longitude]="circle.longitude"
@@ -41,7 +41,7 @@
     [radius]="200"
     [fillOpacity]="0.25"
   >
-  </agm-circle> -->
+  </agm-circle>
   <agm-circle
     *ngFor="let circle of crimeCircles"
     [latitude]="circle.LATITUDE"
