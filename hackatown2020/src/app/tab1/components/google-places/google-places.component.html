@@ -1,22 +1,5 @@
 <div class="input-group">
   <input
-    id="toAddress"
-    placeholder=""
-    type="text"
-    (keydown.enter)="$event.preventDefault()"
-    autocorrect="off"
-    autocapitalize="off"
-    spellcheck="off"
-    #to
-    required
-  />
-  <span class="highlight"></span>
-  <span class="bar"></span>
-  <label>To</label>
-</div>
-
-<div class="input-group">
-  <input
     id="fromAddress"
     placeholder=""
     type="text"
@@ -30,6 +13,23 @@
   <span class="highlight"></span>
   <span class="bar"></span>
   <label>From</label>
+</div>
+
+<div class="input-group">
+  <input
+    id="toAddress"
+    placeholder=""
+    type="text"
+    (keydown.enter)="$event.preventDefault()"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="off"
+    #to
+    required
+  />
+  <span class="highlight"></span>
+  <span class="bar"></span>
+  <label>To</label>
 </div>
 
 <ion-button id="navigateButton" (click)="updateMap()" shape="round">

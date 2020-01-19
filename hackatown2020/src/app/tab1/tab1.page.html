@@ -18,34 +18,34 @@
     <ion-input clearInput></ion-input>
   </ion-item> -->
   
-
-  <!-- History List -->
-  <ion-input id="historyListTitle" value="History" readonly></ion-input>
+  <!-- Favourite List -->
+  <ion-input class="listTitle" value="Favourite" readonly></ion-input>
 
   <ion-list>
-    <ion-item-sliding>
-      <ion-item>
-        <ion-label>Place 1</ion-label>
-      </ion-item>
+    <ion-item-sliding *ngFor="let favourite of favouriteList">
+      <ion-item >{{favourite.name}}</ion-item>
       <ion-item-options side="start">
-        <ion-item-option (click)="remove(item)">Remove</ion-item-option>
+        <ion-item-option (click)="removeFav(favourite.name)">Remove</ion-item-option>
       </ion-item-options>
       <ion-item-options side="end">
-        <ion-item-option (click)="nav(item)">Navigate</ion-item-option>
+        <ion-item-option (click)="navFav(favourite)">Navigate</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
+  </ion-list>  
 
-    <ion-item-sliding>
-      <ion-item>
-        <ion-label>Place 2</ion-label>
-      </ion-item>
+  <!-- History List -->
+  <ion-input class="listTitle" value="History" readonly></ion-input>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let history of historyList">
+      <ion-item >{{history.name}}</ion-item>
       <ion-item-options side="start">
-        <ion-item-option (click)="remove(item)">Remove</ion-item-option>
+        <ion-item-option (click)="removeHist(history.name)">Remove</ion-item-option>
       </ion-item-options>
       <ion-item-options side="end">
-        <ion-item-option (click)="nav(item)">Navigate</ion-item-option>
+        <ion-item-option (click)="navHist(history)">Navigate</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
-  </ion-list>
+  </ion-list> 
 
 </ion-content>
