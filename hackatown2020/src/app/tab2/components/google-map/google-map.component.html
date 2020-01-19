@@ -1,8 +1,22 @@
-<agm-map [style.height.px]="height" [latitude]="lat" [longitude]="lng">
+<agm-map
+  [style.height.px]="height"
+  [latitude]="startingLatitude"
+  [longitude]="startingLongitude"
+>
   <agm-direction
+    *ngIf="waypoints"
     [origin]="origin"
     [destination]="destination"
     [waypoints]="waypoints"
+    travelMode="WALKING"
+    (onResponse)="onResponse($event)"
+  ></agm-direction>
+  <agm-direction
+    [origin]="origin"
+    [destination]="destination"
+    travelMode="WALKING"
+    (onResponse)="onResponse($event)"
+    [renderOptions]="dir.renderOptions"
   ></agm-direction>
   <agm-circle
     [latitude]="lat + 0.3"
