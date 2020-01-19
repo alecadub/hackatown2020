@@ -24,6 +24,8 @@ export class GoogleMapComponent implements OnInit {
   orangeWalkDistance: any;
   blueWalkDistance: any;
 
+  circles: any;
+
   height: number;
 
   waypoints: any;
@@ -50,6 +52,53 @@ export class GoogleMapComponent implements OnInit {
     this.getUserCurrentLocation();
     this.setOriginAndDestination();
     this.subscribeToUserInput();
+    this.parseData();
+  }
+
+  public parseData() {
+    //creating the squares
+    this.circles = new Array();
+
+    let minLongitude: Number = -73.9244750407;
+
+    let minLatitude: Number = 45.4168499734;
+
+    this.circles[0] = {
+      longitude: +minLongitude + 0.005,
+      latitude: +minLatitude + 0.005,
+      crimes: 0,
+      cameras: 0
+    };
+
+    let longitude = minLongitude;
+    let latitude = minLatitude;
+    let count = 1;
+
+    for (var i = 1; i < 4928; i++) {
+      if (count == 88) {
+        latitude = +latitude + 0.005;
+        count = 0;
+
+        this.circles[i] = {
+          longitude: minLongitude,
+          latitude: +minLatitude + 0.005,
+          crimes: 0,
+          cameras: 0
+        };
+        longitude = minLongitude;
+      } else {
+        longitude = +longitude + 0.005;
+        this.circles[i] = {
+          longitude: +longitude + 0.005,
+          latitude: latitude,
+          crimes: 0,
+          cameras: 0
+        };
+      }
+      count++;
+    }
+
+    console.log(this.circles);
   }
 
   public getUserCurrentLocation() {

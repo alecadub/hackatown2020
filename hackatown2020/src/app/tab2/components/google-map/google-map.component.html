@@ -18,7 +18,7 @@
     [longitude]="startingLongitude"
     [iconUrl]="icon"
   ></agm-marker>
-  <agm-direction
+  <!-- <agm-direction
     *ngIf="waypoints"
     [origin]="origin"
     [destination]="destination"
@@ -32,13 +32,14 @@
     travelMode="WALKING"
     (onResponse)="onResponse($event)"
     [renderOptions]="dir.renderOptions"
-  ></agm-direction>
-  <agm-rectangle
-    [east]="-73.5089292023"
-    [west]="-73.849258276"
-    [north]="45.6931206483"
-    [south]="45.4168499734"
+  ></agm-direction> -->
+  <agm-circle
+    *ngFor="let circle of circles"
+    [latitude]="circle.latitude"
+    [longitude]="circle.longitude"
     [fillColor]="'red'"
+    [radius]="200"
+    [fillOpacity]="0.25"
   >
-  </agm-rectangle>
+  </agm-circle>
 </agm-map>
