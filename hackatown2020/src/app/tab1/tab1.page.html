@@ -7,16 +7,6 @@
 <!-- Location and Destination Fields -->
 <ion-content>
   <app-google-places></app-google-places>
-
-  <!-- <ion-item>
-    <ion-label position="floating" (keydown.enter)="$event.preventDefault()" #search>To</ion-label>
-    <ion-input clearInput></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label position="floating">From</ion-label>
-    <ion-input clearInput></ion-input>
-  </ion-item> -->
   
   <!-- Favourite List -->
   <ion-input class="listTitle" value="Favourite" readonly></ion-input>
@@ -25,10 +15,10 @@
     <ion-item-sliding *ngFor="let favourite of favouriteList">
       <ion-item >{{favourite.name}}</ion-item>
       <ion-item-options side="start">
-        <ion-item-option (click)="removeFav(favourite.name)">Remove</ion-item-option>
+        <ion-item-option color="danger" (click)="removeFav(favourite.name)">Remove <ion-icon name="trash"></ion-icon></ion-item-option>
       </ion-item-options>
       <ion-item-options side="end">
-        <ion-item-option (click)="navFav(favourite)">Navigate</ion-item-option>
+        <ion-item-option (click)="navFav(favourite)"><ion-icon name="navigate"></ion-icon> Navigate</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>  
@@ -40,10 +30,10 @@
     <ion-item-sliding *ngFor="let history of historyList">
       <ion-item >{{history.name}}</ion-item>
       <ion-item-options side="start">
-        <ion-item-option (click)="removeHist(history.name)">Remove</ion-item-option>
+        <ion-item-option color="danger" (click)="removeHist(history.name)">Remove <ion-icon name="trash"></ion-icon></ion-item-option>
       </ion-item-options>
       <ion-item-options side="end">
-        <ion-item-option (click)="navHist(history)">Navigate</ion-item-option>
+        <ion-item-option (click)="navHist(history)"><ion-icon name="navigate"></ion-icon> Navigate</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list> 

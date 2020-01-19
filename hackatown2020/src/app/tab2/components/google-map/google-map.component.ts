@@ -180,10 +180,11 @@ export class GoogleMapComponent implements OnInit {
 
     return (
       ('0' + h).slice(-2) +
-      ':' +
+      'h ' +
       ('0' + m).slice(-2) +
-      ':' +
-      ('0' + s).slice(-2)
+      'min ' +
+      ('0' + s).slice(-2) +
+      's'
     );
   }
 }

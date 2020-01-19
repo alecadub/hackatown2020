@@ -1,5 +1,20 @@
-.orangeWalk {
+.header-md{
+    text-align: center;
 }
 
-.blueWalk {
+.walkTime{
+    font-size: 22px;
+}
+
+#orangeWalk {
+    margin-right: 120px;
+    color: orange;
+}
+
+#blueWalk {
+    color: blue;
+}
+
+ion-label{
+    font-weight: bold;
 }

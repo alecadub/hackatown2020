@@ -1,9 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    {{ orangeWalkDistance }}
-    <ion-icon class="orangeWalk" name="walk"></ion-icon>
-    {{ blueWalkDistance }}
-    <ion-icon class="blueWalk" name="walk"></ion-icon>
+    <ion-label>Default: </ion-label> {{ orangeWalkDistance }}
+    <ion-icon class="walkTime" id="orangeWalk" name="walk"></ion-icon>
+  
+    <ion-label>Safe: </ion-label> {{ blueWalkDistance }}
+    <ion-icon class="walkTime" id="blueWalk" name="walk"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
