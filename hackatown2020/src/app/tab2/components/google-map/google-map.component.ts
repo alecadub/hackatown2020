@@ -24,7 +24,7 @@ export class GoogleMapComponent implements OnInit {
   orangeWalkDistance: any;
   blueWalkDistance: any;
 
-  squares: any;
+  circles: any;
 
   height: number;
 
@@ -57,17 +57,15 @@ export class GoogleMapComponent implements OnInit {
 
   public parseData() {
     //creating the squares
-    this.squares = new Array<Object>();
+    this.circles = new Array();
 
-    let minLongitude: number = -73.9244750407;
+    let minLongitude: Number = -73.9244750407;
 
-    let minLatitude: number = 45.4168499734;
+    let minLatitude: Number = 45.4168499734;
 
-    this.squares[0] = {
-      south: minLatitude,
-      east: minLongitude + 0.005,
-      north: minLatitude + 0.005,
-      west: minLongitude,
+    this.circles[0] = {
+      longitude: +minLongitude + 0.005,
+      latitude: +minLatitude + 0.005,
       crimes: 0,
       cameras: 0
     };
@@ -76,26 +74,23 @@ export class GoogleMapComponent implements OnInit {
     let latitude = minLatitude;
     let count = 1;
 
-    for (var i = 1; i < 10; i++) {
+    for (var i = 1; i < 4928; i++) {
       if (count == 88) {
-        latitude += 0.005;
+        latitude = +latitude + 0.005;
         count = 0;
 
-        this.squares[i] = {
-          south: minLatitude,
-          east: minLongitude,
-          north: minLatitude + 0.005,
-          west: minLongitude,
+        this.circles[i] = {
+          longitude: minLongitude,
+          latitude: +minLatitude + 0.005,
           crimes: 0,
           cameras: 0
         };
+        longitude = minLongitude;
       } else {
-        longitude += 0.005;
-        this.squares[i] = {
-          south: latitude,
-          east: longitude + 0.005,
-          north: latitude,
-          west: longitude,
+        longitude = +longitude + 0.005;
+        this.circles[i] = {
+          longitude: +longitude + 0.005,
+          latitude: latitude,
           crimes: 0,
           cameras: 0
         };
@@ -103,7 +98,7 @@ export class GoogleMapComponent implements OnInit {
       count++;
     }
 
-    console.log(this.squares);
+    console.log(this.circles);
   }
 
   public getUserCurrentLocation() {
