@@ -18,7 +18,7 @@
     [longitude]="startingLongitude"
     [iconUrl]="icon"
   ></agm-marker>
-  <agm-direction
+  <!-- <agm-direction
     *ngIf="waypoints"
     [origin]="origin"
     [destination]="destination"
@@ -32,15 +32,16 @@
     travelMode="WALKING"
     (onResponse)="onResponse($event)"
     [renderOptions]="dir.renderOptions"
-  ></agm-direction> -->
+  ></agm-direction>  -->
+  
   <agm-rectangle
-    *ngFor= "let item of squares"
-    [east] = "item.SE"
-    [west] = "item.NW"
-    [north] = "item.NE"
-    [south] = "item.SW"
+    *ngFor= "let square of squares"
+    [east] = "square.east"
+    [west] = "square.west"
+    [north] = "square.north"
+    [south] = "square.south"
     [fillColor] = "'red'"
-    [fillOpacity] = "'0.005'"
+    [fillOpacity] = "'1'"
   >
   </agm-rectangle>
 </agm-map>

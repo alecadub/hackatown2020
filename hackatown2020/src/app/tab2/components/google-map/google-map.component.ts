@@ -55,58 +55,55 @@ export class GoogleMapComponent implements OnInit {
     this.parseData();
   }
 
-  public parseData(){
-    
+  public parseData() {
     //creating the squares
-    this.squares= new Array<Object>();
+    this.squares = new Array<Object>();
 
     let minLongitude: number = -73.9244750407;
-    //*****let maxLongitude: number = -73.489373;
 
     let minLatitude: number = 45.4168499734;
-    //******let maxLatitude: number = 45.6931206483;
 
     this.squares[0] = {
-      SW: minLongitude,
-      SE: minLongitude+0.005,
-      NW: minLatitude,
-      NE: minLatitude+0.005,
+      south: minLatitude,
+      east: minLongitude + 0.005,
+      north: minLatitude + 0.005,
+      west: minLongitude,
       crimes: 0,
       cameras: 0
-    }
+    };
 
     let longitude = minLongitude;
     let latitude = minLatitude;
     let count = 1;
 
-    for(var i=1; i < 4928; i++){
-      
-      if (count == 88){
+    for (var i = 1; i < 10; i++) {
+      if (count == 88) {
         latitude += 0.005;
         count = 0;
 
         this.squares[i] = {
-          SW: minLongitude,
-          SE: minLongitude+0.005,
-          NW: latitude,
-          NE: latitude+0.05,
+          south: minLatitude,
+          east: minLongitude,
+          north: minLatitude + 0.005,
+          west: minLongitude,
           crimes: 0,
           cameras: 0
-        }
-      }
-      else{
-        longitude += 0.005; 
+        };
+      } else {
+        longitude += 0.005;
         this.squares[i] = {
-          SW: longitude,
-          SE: longitude+0.005,
-          NW: latitude,
-          NE: latitude+0.05,
+          south: latitude,
+          east: longitude + 0.005,
+          north: latitude,
+          west: longitude,
           crimes: 0,
           cameras: 0
-        }
+        };
       }
       count++;
     }
+
+    console.log(this.squares);
   }
 
   public getUserCurrentLocation() {
