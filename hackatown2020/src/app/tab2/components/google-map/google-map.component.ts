@@ -98,6 +98,7 @@ export class GoogleMapComponent implements OnInit {
       count++;
     }
 
+
     console.log(this.circles);
   }
 
