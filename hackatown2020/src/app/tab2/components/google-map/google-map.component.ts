@@ -17,6 +17,9 @@ export class GoogleMapComponent implements OnInit {
   origin: any;
   destination: any;
 
+  waypointSet = false;
+  waypointPut = false;
+
   crimeCircles: any;
   cameraCircles: any;
 
@@ -32,7 +35,7 @@ export class GoogleMapComponent implements OnInit {
 
   height: number;
 
-  waypoints: any;
+  waypoints = [];
 
   dir = {
     renderOptions: {
@@ -126,37 +129,114 @@ export class GoogleMapComponent implements OnInit {
   }
 
   public setOriginAndDestination() {
-    this.origin = { lat: 29.8174782, lng: -95.6814757 };
-    this.destination = { lat: 40.6976637, lng: -74.119764 };
+    // this.origin = { lat: 29.8174782, lng: -95.6814757 };
+    // this.destination = { lat: 40.6976637, lng: -74.119764 };
   }
 
   public subscribeToUserInput() {
     this.locationService.origin.subscribe(resp => {
       if (Array.isArray(resp) && resp.length) {
         this.origin = { lat: resp[0], lng: resp[1] };
+        this.waypointSet = false;
       }
     });
     this.locationService.destination.subscribe(resp => {
       if (Array.isArray(resp) && resp.length) {
-        if (resp[2]){
+        if (resp[2]) {
           this.getUserCurrentLocation();
-          this.origin = { lat: this.startingLatitude, lng: this.startingLongitude };
+          this.origin = {
+            lat: this.startingLatitude,
+            lng: this.startingLongitude
+          };
         }
         this.destination = { lat: resp[0], lng: resp[1] };
       }
     });
   }
 
-  public setWaypoints() {
+  public setWaypoints(points: any) {
+    let arrayPoint = points.overview_path;
+
+    let arrayPoint0 = {
+      lat: arrayPoint[0].lat(),
+      lng: arrayPoint[0].lng()
+    };
+    let arrayPoint10 = {
+      lat: arrayPoint[10].lat(),
+      lng: arrayPoint[10].lng()
+    };
+    let arrayPoint20 = {
+      lat: arrayPoint[20].lat(),
+      lng: arrayPoint[20].lng()
+    };
+    let arrayPoint30 = {
+      lat: arrayPoint[30].lat(),
+      lng: arrayPoint[30].lng()
+    };
+    let arrayPoint40 = {
+      lat: arrayPoint[40].lat(),
+      lng: arrayPoint[40].lng()
+    };
+    let arrayPoint50 = {
+      lat: arrayPoint[50].lat(),
+      lng: arrayPoint[50].lng()
+    };
+
+    if (this.isPointInCrimeRegion(arrayPoint[0])) {
+      arrayPoint0 = {
+        lat: arrayPoint[0].lat() + 0.002,
+        lng: arrayPoint[0].lng() + 0.002
+      };
+    }
+
+    if (this.isPointInCrimeRegion(arrayPoint[10])) {
+      arrayPoint10 = {
+        lat: arrayPoint[10].lat() + 0.002,
+        lng: arrayPoint[10].lng() + 0.002
+      };
+    }
+
+    if (this.isPointInCrimeRegion(arrayPoint[20])) {
+      arrayPoint20 = {
+        lat: arrayPoint[20].lat() + 0.002,
+        lng: arrayPoint[20].lng() + 0.002
+      };
+    }
+
+    if (this.isPointInCrimeRegion(arrayPoint[30])) {
+      arrayPoint10 = {
+        lat: arrayPoint[30].lat() + 0.002,
+        lng: arrayPoint[30].lng() + 0.002
+      };
+    }
+
+    if (this.isPointInCrimeRegion(arrayPoint[40])) {
+      arrayPoint10 = {
+        lat: arrayPoint[40].lat() + 0.002,
+        lng: arrayPoint[40].lng() + 0.002
+      };
+    }
+
+    if (this.isPointInCrimeRegion(arrayPoint[50])) {
+      arrayPoint50 = {
+        lat: arrayPoint[50].lat() + 0.002,
+        lng: arrayPoint[50].lng() + 0.002
+      };
+    }
     this.waypoints = [
-      { location: { lat: 39.0921167, lng: -94.8559005 } },
-      { location: { lat: 41.8339037, lng: -87.8720468 } }
+      { location: { lat: arrayPoint0.lat, lng: arrayPoint0.lng } },
+      { location: { lat: arrayPoint10.lat, lng: arrayPoint10.lng } },
+      { location: { lat: arrayPoint20.lat, lng: arrayPoint20.lng } },
+      { location: { lat: arrayPoint30.lat, lng: arrayPoint30.lng } },
+      { location: { lat: arrayPoint40.lat, lng: arrayPoint40.lng } },
+      { location: { lat: arrayPoint50.lat, lng: arrayPoint50.lng } }
     ];
   }
 
   public onResponse(event: any) {
     if (event && event.routes[0]) {
       if (event.routes[0].legs.length > 1) {
+        console.log(event);
         let totalValue = 0;
         event.routes[0].legs.forEach(elm => {
           totalValue = totalValue + elm.duration.value;
@@ -167,7 +247,9 @@ export class GoogleMapComponent implements OnInit {
           event.routes[0].legs[0].duration.value
         );
       }
-      this.setWaypoints();
+      if (event.routes[0].overview_path) {
+        this.setWaypoints(event.routes[0]);
+      }
     }
   }
 
@@ -186,5 +268,27 @@ export class GoogleMapComponent implements OnInit {
       ('0' + s).slice(-2) +
       's'
     );
+  }
+
+  public measure(lat1: any, lon1: any, lat2: any, lon2: any) {
+    if (Math.abs(lat1 - lat2) < 0.002 || Math.abs(lon1 - lon2) < 0.002) {
+      return 201;
+    }
+  }
+
+  public isPointInCrimeRegion(point: any) {
+    let isIn = false;
+    this.crimeCircles.forEach(elm => {
+      let number = this.measure(
+        elm.LATITUDE,
+        elm.LONGITUDE,
+        point.lat(),
+        point.lng()
+      );
+      if (number > 200) {
+        isIn = true;
+      }
+    });
+    return isIn;
   }
 }

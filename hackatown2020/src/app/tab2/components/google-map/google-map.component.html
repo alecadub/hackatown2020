@@ -20,7 +20,6 @@
     [iconUrl]="icon"
   ></agm-marker>
   <agm-direction
-    *ngIf="waypoints"
     [origin]="origin"
     [destination]="destination"
     [waypoints]="waypoints"
@@ -34,15 +33,6 @@
     (onResponse)="onResponse($event)"
     [renderOptions]="dir.renderOptions"
   ></agm-direction>
-  <agm-circle
-    *ngFor="let circle of circles"
-    [latitude]="circle.latitude"
-    [longitude]="circle.longitude"
-    [fillColor]="'red'"
-    [radius]="200"
-    [fillOpacity]="0.25"
-  >
-  </agm-circle>
   <agm-circle
     *ngFor="let circle of crimeCircles"
     [latitude]="circle.LATITUDE"
