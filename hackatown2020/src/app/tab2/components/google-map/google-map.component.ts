@@ -33,7 +33,7 @@ export class GoogleMapComponent implements OnInit {
     public locationService: LocalisationService,
     private geolocation: Geolocation
   ) {
-    this.height = platform.height();
+    this.height = platform.height() - 112;
   }
 
   ngOnInit() {
@@ -83,6 +83,7 @@ export class GoogleMapComponent implements OnInit {
   }
 
   public onResponse(event: any) {
+    console.log(event);
     if (event) {
       // console.log(event.routes[0].overview_path[0].lat());
       this.setWaypoints();
