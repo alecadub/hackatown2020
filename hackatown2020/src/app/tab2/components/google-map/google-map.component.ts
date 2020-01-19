@@ -39,6 +39,7 @@ export class GoogleMapComponent implements OnInit {
   ngOnInit() {
     this.getUserCurrentLocation();
     this.setOriginAndDestination();
+    this.subscribeToUserInput();
   }
 
   public getUserCurrentLocation() {
@@ -60,6 +61,20 @@ export class GoogleMapComponent implements OnInit {
     this.destination = { lat: 40.6976637, lng: -74.119764 };
   }
 
+  public subscribeToUserInput() {
+    this.locationService.origin.subscribe(resp => {
+      if (Array.isArray(resp) && resp.length) {
+        console.log(resp);
+        this.origin = { lat: resp[0], lng: resp[1] };
+      }
+    });
+    this.locationService.destination.subscribe(resp => {
+      if (Array.isArray(resp) && resp.length) {
+        this.destination = { lat: resp[0], lng: resp[1] };
+      }
+    });
+  }
+
   public setWaypoints() {
     this.waypoints = [
       { location: { lat: 39.0921167, lng: -94.8559005 } },
@@ -69,7 +84,7 @@ export class GoogleMapComponent implements OnInit {
 
   public onResponse(event: any) {
     if (event) {
-      console.log(event.routes[0].overview_path[0].lat());
+      // console.log(event.routes[0].overview_path[0].lat());
       this.setWaypoints();
     }
   }
