@@ -1,3 +1,5 @@
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
 <p align="center">
   <img src="https://i.ibb.co/kg5gRFB/bsafe.jpg"></img>
 </p>
@@ -5,8 +7,6 @@
 <h2 align="center">
   Official repo for the lorraine team at hackatown 2020
 </h2>
-
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 # Inspiration
 
